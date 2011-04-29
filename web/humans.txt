@@ -1,0 +1,27 @@
+/* TEAM */
+  Earthrooted means officer: Luis Artola
+  Contact: luisartola [at] programania.es
+  Twitter: @programania
+  From: Donostia, Guipúzcoa, Spain
+
+  Berserk technology juggler: David González Díez
+  Contact: davidgonzalezdiez [at] programania.es
+  Twitter: @penguinjournals
+  From: Donostia, Guipúzcoa, Spain
+
+  Bar-raiser zealot: Guillermo Gutiérrez
+  Contact: guille [at] programania.es
+  Twitter: @ggalmazor
+  From: Donostia, Guipúzcoa, Spain
+
+/* SITE */
+  Last update: 2011/03/13
+  Language: Spanish
+  Doctype: HTML5 with CSS3
+  Tools: PHP, Silex (Symfony2), Twig
+  IDE: NetBeans 6.9.1 (OSx)
+
+/* THANKS */
+  12 meses 12 katas: 12meses12katas.com
+  HTML5 Boiler Plate: http://html5boilerplate.com
+  Spotify: http://www.spotify.com (no music = no code)

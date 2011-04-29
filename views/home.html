@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="left">
+  <div class="katayunos">
+    {% include 'katayunos.html' %}
+  </div>
+  <div style="clear: right;"></div>
+</div>
+
+<div class="right">
+  <div class="merendojos">
+    {% include 'merendojos.html' %}
+  </div>
+  <div style="clear: left;"></div>
+</div>
+
+<div class="clear"></div>
+
+<div class="next">
+  {% include 'next.html' %}
+</div>
+
+<div class="left">
+  <div class="katayunos">
+    {% include 'katayunos-format.html' %}
+  </div>
+  <div style="clear: right;"></div>
+</div>
+
+<div class="right">
+  <div class="merendojos">
+    {% include 'merendojos-format.html' %}
+  </div>
+  <div style="clear: left;"></div>
+</div>
+
+<div class="clear"></div>
+
+<footer>
+  {% include 'footer.html' %}
+</footer>
+
+{% endblock %}
