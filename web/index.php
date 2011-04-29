@@ -8,11 +8,16 @@ $app = new Silex\Application;
 use Silex\Extension\TwigExtension;
 
 $app->register(new TwigExtension(), array(
-    'twig.path'       => ROOT_DIR.'/views'
+    'twig.path'       => ROOT_DIR.'/views',
+    'twig.class_path' => ROOT_DIR.'/vendor/Twig/lib',
 ));
 
 $app->match('/', function () use($app) {
   return $app['twig']->render('home.html');
+});
+
+$app->match('/humans.txt', function () use($app) {
+  return $app['twig']->render('robots.html');
 });
 
 $app->error(function ($e) use ($app){
