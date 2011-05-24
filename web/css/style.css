@@ -280,7 +280,6 @@ h1, h2 {
 .next .map img,
 .next .map iframe {
   width: 400px;
-  height: 200px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
   border-radius: 10px;
