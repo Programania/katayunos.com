@@ -299,7 +299,7 @@ h1, h2 {
   font-size: 1.3em;
 }
 
-.next .checkin a:hover {
+.next .checkin a:hover {\\
   text-decoration: none;
   text-shadow: #9A001E 2px 2px 2px;
   border: 0;
