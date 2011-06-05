@@ -293,6 +293,18 @@ h1, h2 {
   
 }
 
+.next .checkin a {
+  font-family: Lobster;
+  
+  font-size: 1.3em;
+}
+
+.next .checkin a:hover {
+  text-decoration: none;
+  text-shadow: #9A001E 2px 2px 2px;
+  border: 0;
+}
+
 footer {
   width: 960px;
   margin-top: 60px;
