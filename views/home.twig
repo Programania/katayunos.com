@@ -1,0 +1,36 @@
+{% extends "layout.twig" %}
+
+{% block content %}
+
+{% include 'header.twig' %}
+
+<div class="clear"></div>
+
+<div class="next">
+  {% include 'next.twig' %}
+</div>
+
+<div class="clear"></div>
+
+<div class="left">
+  <div class="katayunos">
+    {% include 'katayunos.twig' %}
+  </div>
+  <div style="clear: right;"></div>
+</div>
+
+<div class="right">
+  <div class="merendojos">
+    {% include 'merendojos.twig' %}
+  </div>
+  <div style="clear: left;"></div>
+</div>
+
+
+<div class="clear"></div>
+
+<footer>
+  {% include 'footer.twig' %}
+</footer>
+
+{% endblock %}

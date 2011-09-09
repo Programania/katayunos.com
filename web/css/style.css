@@ -174,6 +174,8 @@ h1, h2 {
   border-bottom: 1px dashed #9A001E;
 }
 
+
+
 .katayunos h1 {
   font-size: 75px;
   text-shadow: #9A001E 2px 2px 2px;
@@ -234,10 +236,6 @@ h1, h2 {
   font-size: 14px;
 }
 
-.next a:hover {
-  border-bottom: 1px dashed #fff;
-}
-
 .next .calendar {
   width: 235px;
   height: 250px;
@@ -268,42 +266,16 @@ h1, h2 {
 
 .next .info{
   float: left;
-  width: 250px;
+  width: 675px;
 }
 
-.next .map{
-  float: right;
-  width: 400px;
-  margin-top: 29px;
-}
-
-.next .map img,
-.next .map iframe {
-  width: 400px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  -moz-box-shadow: 6px 8px 4px #444;
-  -webkit-box-shadow: 6px 8px 4px #444;
-  box-shadow: 6px 8px 4px #444;
-}
-
-.next .map img {
-  opacity: 0.3;
-  
-}
-
-.next .checkin a {
-  font-family: Lobster;
-  
-  font-size: 1.3em;
-}
-
-.next .checkin a:hover {\\
-  text-decoration: none;
-  text-shadow: #9A001E 2px 2px 2px;
-  border: 0;
-}
+/*.next .locations a {*/
+  /*padding-left: 52px;*/
+  /*background-image: url('/images/ticket-icon.png');*/
+  /*background-position: top left;*/
+  /*background-repeat: no-repeat;*/
+  /*background-scale: 50%;*/
+/*}*/
 
 footer {
   width: 960px;
