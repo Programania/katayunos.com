@@ -297,6 +297,11 @@ footer ul.sponsors {
 footer li {
   display: inline-block;
   list-style: none;
+  margin-right: 10px;
+}
+
+footer li:last-child {
+  margin-right: 0;
 }
 
 footer h2 {
