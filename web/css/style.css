@@ -67,14 +67,15 @@ h1.header.merendojos {
   width: 235px;
   height: 250px;
   float: left;
-  background-image: url('/images/calendar-bg.png');
+  background: transparent url('/images/calendar.png') center center no-repeat;
   margin: 20px;
+  padding:  1px 2px 3px 4px;
 }
 
 .next-katayuno .calendar .month {
   display: block;
   text-align: center;
-  margin: 59px 10px 0px auto;
+  margin: 84px 10px 0px auto;
   color: #fff;
   font-size: 25px;
   font-family: Lobster;
