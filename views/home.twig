@@ -2,35 +2,34 @@
 
 {% block content %}
 
-{% include 'header.twig' %}
+<div class="grid_6">
+  <h1 class="header katayunos">Katayunos</h1>
+</div>
+
+<div class="grid_6">
+  <h1 class="header merendojos">Merendojos</h1>
+</div>
 
 <div class="clear"></div>
 
-<div class="next">
+<div class="grid_12 next-katayuno">
   {% include 'next.twig' %}
 </div>
 
 <div class="clear"></div>
 
-<div class="left">
-  <div class="katayunos">
-    {% include 'katayunos.twig' %}
-  </div>
-  <div style="clear: right;"></div>
+<div class="grid_6 about katayunos">
+  {% include 'katayunos.twig' %}
 </div>
 
-<div class="right">
-  <div class="merendojos">
-    {% include 'merendojos.twig' %}
-  </div>
-  <div style="clear: left;"></div>
+<div class="grid_6 about merendojos">
+  {% include 'merendojos.twig' %}
 </div>
-
 
 <div class="clear"></div>
 
-<footer>
+<div class="grid_12 footer">
   {% include 'footer.twig' %}
-</footer>
+</div>
 
 {% endblock %}

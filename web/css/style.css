@@ -1,106 +1,8 @@
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
-}
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-blockquote, q { quotes: none; }
-blockquote:before, blockquote:after,
-q:before, q:after { content: ''; content: none; }
-ins { background-color: #ff9; color: #000; text-decoration: none; }
-mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
-del { text-decoration: line-through; }
-abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
-table { border-collapse: collapse; border-spacing: 0; }
-hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
-input, select { vertical-align: middle; }
-body { font:13px/1.231 sans-serif; *font-size:small; }
-select, input, textarea, button { font:99% sans-serif; }
-pre, code, kbd, samp { font-family: monospace, sans-serif; }
-html { overflow-y: scroll; }
-a:hover, a:active { outline: none; }
-ul, ol { margin-left: 2em; }
-ol { list-style-type: decimal; }
-nav ul, nav li { margin: 0; list-style:none; list-style-image: none; }
-small { font-size: 85%; }
-strong, th { font-weight: bold; }
-td { vertical-align: top; }
-sub, sup { font-size: 75%; line-height: 0; position: relative; }
-sup { top: -0.5em; }
-sub { bottom: -0.25em; }
-pre {
-  white-space: pre; white-space: pre-wrap; word-wrap: break-word;
-  padding: 15px;
-}
-textarea { overflow: auto; }
-.ie6 legend, .ie7 legend { margin-left: -7px; }
-input[type="radio"] { vertical-align: text-bottom; }
-input[type="checkbox"] { vertical-align: bottom; }
-.ie7 input[type="checkbox"] { vertical-align: baseline; }
-.ie6 input { vertical-align: text-bottom; }
-label, input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer; }
-button, input, select, textarea { margin: 0; }
-input:valid, textarea:valid   {  }
-input:invalid, textarea:invalid {
-  border-radius: 1px; -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red; box-shadow: 0px 0px 5px red;
-}
-.no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
-a:link { -webkit-tap-highlight-color: #FF5E99; }
-button {  width: auto; overflow: visible; }
-.ie7 img { -ms-interpolation-mode: bicubic; }
-h1, h2, h3, h4, h5, h6 { font-weight: bold; }
-a, a:active, a:visited { color: #607890; }
-a:hover { color: #036; }
-.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
-.hidden { display: none; visibility: hidden; }
-.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
-.visuallyhidden.focusable:active,
-.visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
-.invisible { visibility: hidden; }
-.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
-.clearfix:after { clear: both; }
-.clearfix { zoom: 1; }
-@media all and (orientation:portrait) {}
-@media all and (orientation:landscape) {}
-@media screen and (max-device-width: 480px) {}
-@media print {
-  * { background: transparent !important; color: black !important; text-shadow: none !important; filter:none !important;
-      -ms-filter: none !important; } /* Black prints faster: sanbeiji.com/archives/953 */
-  a, a:visited { color: #444 !important; text-decoration: underline; }
-  a[href]:after { content: " (" attr(href) ")"; }
-  abbr[title]:after { content: " (" attr(title) ")"; }
-  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }  /* Don't show links for images, or javascript/internal links */
-  pre, blockquote { border: 1px solid #999; page-break-inside: avoid; }
-  thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
-  tr, img { page-break-inside: avoid; }
-  @page { margin: 0.5cm; }
-  p, h2, h3 { orphans: 3; widows: 3; }
-  h2, h3{ page-break-after: avoid; }
-}
-
-
 /*http://colorschemedesigner.com/#5v21Tw0w0w0w0*/
 
-@font-face { font-family: Lobster; src: url('/css/lobster.otf'); }
-
-.clear {
-  clear: both;
+@font-face {
+  font-family: Lobster;
+  src: url('/css/lobster.otf');
 }
 
 body {
@@ -117,236 +19,155 @@ a, a:visited, a:hover, a:active {
   font-weight: bold;
 }
 
-a.flickr, a.twitter, a.google-calendar {
-  display: inline-block;
-  padding: 1px 0 1px 20px;
-  line-height: 16px;
-}
-
-a.flickr {
-  background: transparent url('/images/logo-flickr.png') 0 0 no-repeat;
-}
-
-a.twitter {
-  background: transparent url('/images/logo-twitter.png') 0 0 no-repeat;
-}
-
-a.google-calendar {
-  background: transparent url('/images/logo-google.png') 0 0 no-repeat;
-}
-
 p {
   margin-bottom: 10px;
 }
 
-
 h1, h2 {
   font-family: Lobster;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 }
 
-#container {
-  width: 100%;
-}
+/* Header */
 
-.next, footer {
-  margin: 0 auto;
-}
-
-.left, .right {
-  width: 50%;
-  float: left;
-}
-
-.katayunos {
-  text-align: justify;
-  width: 460px;
-  float: right;
-  margin-right: 20px;
-}
-
-.katayunos strong,
-.katayunos a {
-  color: #9A001E;
-}
-
-.katayunos a:hover {
-  border-bottom: 1px dashed #9A001E;
-}
-
-
-
-.katayunos h1 {
+h1.header {
   font-size: 75px;
+}
+
+h1.header.katayunos {
+  color: #000;
   text-shadow: #9A001E 2px 2px 2px;
 }
 
-.katayunos h2 {
-  font-size: 25px;
-  text-shadow: #9A001E 2px 2px 2px;
-}
-
-.katayunos ul, .merendojos ul {
-  margin-bottom: 15px;
-}
-
-.merendojos {
-  text-align: justify;
-  width: 460px;
-  float: left;
-  margin-left: 20px;
-}
-
-.merendojos strong,
-.merendojos a {
-  color: #2E8F00;
-}
-
-.merendojos a:hover {
-  border-bottom: 1px dashed #2E8F00;
-}
-
-.merendojos h1 {
-  font-size: 75px;
+h1.header.merendojos {
+  color: #000;
   text-shadow: #2E8F00 2px 2px 2px;
 }
 
-.merendojos h2 {
-  font-size: 25px;
-  text-shadow: #2E8F00 2px 2px 2px;
-}
+/* Next Katayuno */
 
-.next {
-  width: 920px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: grey;
-  padding: 20px;
+.next-katayuno {
+  background: transparent url('/images/carbon_fiber.jpg') center center no-repeat;
   -moz-border-radius: 20px;
   -webkit-border-radius: 20px;
   border-radius: 20px;
+  color: #ddd;
+  margin: 20px 0;
+  padding-bottom: 20px;
+}
+
+.next-katayuno h2 {
+  font-size: 30px;
   color: #fff;
+  text-shadow: #2E8F00 2px 2px 2px;
 }
 
-.next h2 {
-  font-size: 19px;
-}
-
-.next p {
-  font-size: 14px;
-}
-
-.next .calendar {
+.next-katayuno .calendar {
   width: 235px;
   height: 250px;
   float: left;
   background-image: url('/images/calendar-bg.png');
-  margin-right: 10px;
+  margin: 20px;
 }
 
-.next .calendar .month{
+.next-katayuno .calendar .month {
   display: block;
   text-align: center;
-  font-size: 35px;
-  margin: 50px 10px 0px auto;
+  margin: 59px 10px 0px auto;
   color: #fff;
-  font-size: 30px;
+  font-size: 25px;
   font-family: Lobster;
 }
 
-.next .calendar .day{
+.next-katayuno .calendar .day {
   display: block;
   text-align: center;
   padding-top: 0px;
-  margin: -10px 10px 0px auto;
+  margin: 10px 10px 0px auto;
   color: #000;
   font-size: 100px;
   font-family: Lobster;
 }
 
-.next .info{
-  float: left;
-  width: 675px;
+.next-katayuno .info a {
+  border-bottom: 1px dashed #ddd;
 }
 
-/*.next .locations a {*/
-  /*padding-left: 52px;*/
-  /*background-image: url('/images/ticket-icon.png');*/
-  /*background-position: top left;*/
-  /*background-repeat: no-repeat;*/
-  /*background-scale: 50%;*/
-/*}*/
+.next-katayuno .info a:hover {
+  border-bottom: 1px dashed #fff;
+  color: #fff;
+  text-shadow: #fff 0 0 4px;
+}
 
-footer {
-  width: 960px;
-  margin-top: 60px;
-  margin-bottom: 100px;
-  font-size: 16px;
+.next-katayuno .info {
+  float: left;
+  width: 645px;
+  margin: 50px 0 20px 0;
+}
+
+.next-katayuno .locations {
+  margin-left: 275px;
+}
+
+.about {
+  color: #333;
+}
+
+.about a {
+  border-bottom:  1px dashed #333;
+}
+
+.about a:hover {
+  border-bottom: 1px dashed #000;
   color: #000;
+}
+
+.about ul {
+  margin-bottom: 10px;
+}
+
+.about li {
+  list-style: circle;
+  padding-left: 0;
+  margin-left: 50px;
+}
+
+.katayunos h2 {
+  color: #000;
+  text-shadow: #9A001E 2px 2px 2px;
+  font-size: 30px;
+}
+
+.katayunos a:hover {
+  text-shadow: #9A001E 0 0 4px;
+}
+
+.merendojos h2 {
+  color: #000;
+  text-shadow: #2E8F00 2px 2px 2px;
+  font-size: 30px;
+}
+
+.merendojos a:hover {
+  text-shadow: #2E8F00 0 0 4px;
+}
+
+.footer {
   text-align: center;
+  margin:  40px 0 350px 0;
 }
 
-footer ul {
-  margin: 0;
+.footer h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
 }
 
-footer ul.sponsors {
-  margin-bottom: 50px;
-}
-
-footer li {
-  display: inline-block;
-  list-style: none;
-  margin-right: 10px;
-}
-
-footer li:last-child {
-  margin-right: 0;
-}
-
-footer h2 {
-  margin-top: 30px;
-  font-size: 25px;
-}
-
-
-footer .resources {
+.footer li {
   display: block;
-  float: left;
   list-style: none;
-  margin: 0 20px;
-  padding: 0;
-  width: 280px;
-  text-align: center;
-  padding-top: 150px;
+  margin: 30px;
 }
 
-footer .resources a {
-  display: block;
+.footer li img {
+  max-height: 150px;
 }
-
-footer .resources a a {
-  display: inline-block;
-}
-
-footer .google-calendar {
-  background: transparent url('/images/logos/google-calendar-150.jpg') 50% 0 no-repeat;
-}
-
-footer .twitter {
-  background: transparent url('/images/logos/twitter-150.png') 50% 0 no-repeat;
-}
-
-footer .flickr {
-  background: transparent url('/images/logos/flickr-150.png') 50% 0 no-repeat;
-}
-
-footer a {
-  font-weight: normal;
-}
-
-
-
-
-
-
