@@ -2,12 +2,21 @@
 
 {% block content %}
 
-<div class="grid_6">
-  <h1 class="header katayunos">Katayunos</h1>
+{#<div class="grid_6">#}
+  {#<h1 class="header katayunos">Katayunos</h1>#}
+{#</div>#}
+
+{#<div class="grid_6">#}
+  {#<h1 class="header merendojos">Merendojos</h1>#}
+{#</div>#}
+<div class="grid_12 centered">
+  <h1 class="header katayunos">Especial</h1>
 </div>
 
-<div class="grid_6">
-  <h1 class="header merendojos">Merendojos</h1>
+<div class="clear"></div>
+
+<div class="grid_12 centered">
+  <h1 class="header merendojos">Global day of Coderetreat</h1>
 </div>
 
 <div class="clear"></div>
@@ -18,12 +27,15 @@
 
 <div class="clear"></div>
 
-<div class="grid_6 about katayunos">
-  {% include 'katayunos.twig' %}
-</div>
+{#<div class="grid_6 about katayunos">#}
+  {#{% include 'katayunos.twig' %}#}
+{#</div>#}
 
-<div class="grid_6 about merendojos">
-  {% include 'merendojos.twig' %}
+{#<div class="grid_6 about merendojos">#}
+  {#{% include 'merendojos.twig' %}#}
+{#</div>#}
+<div class="push_2 grid_8 about katayunos">
+  {% include 'code-retreat.twig' %}
 </div>
 
 <div class="clear"></div>

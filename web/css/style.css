@@ -174,3 +174,7 @@ h1.header.merendojos {
 .footer li img {
   max-height: 150px;
 }
+
+.centered {
+  text-align: center;
+}
