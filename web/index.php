@@ -1,13 +1,13 @@
 <?php
-error_reporting(E_ALL);
+
 define('ROOT_DIR', realpath(__DIR__ . '/../'));
 require_once ROOT_DIR . '/silex.phar';
 
 $app = new Silex\Application();
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path'       => __DIR__.'/views',
-    'twig.class_path' => __DIR__.'/vendor/twig/lib',
+    'twig.path'       => ROOT_DIR.'/views',
+    'twig.class_path' => ROOT_DIR.'/vendor/twig/lib',
 ));
 
 $app->match('/', function () use($app) {
