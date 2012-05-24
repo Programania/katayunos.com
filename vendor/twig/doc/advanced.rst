@@ -164,7 +164,7 @@ Adding a filter is as simple as calling the ``addFilter()`` method on the
 ``Twig_Environment`` instance::
 
     $twig = new Twig_Environment($loader);
-    $twig->addFilter('rot13', new Twig_Filter_Function('str_rot13'));
+    $twig->addFilter('rot13', new Twig_Filter_Function('rot13'));
 
 The second argument of ``addFilter()`` is an instance of ``Twig_Filter``.
 Here, we use ``Twig_Filter_Function`` as the filter is a PHP function. The
@@ -240,40 +240,6 @@ case, set the ``pre_escape`` option::
 
     $filter = new Twig_Filter_Function('somefilter', array('pre_escape' => 'html', 'is_safe' => array('html')));
 
-Dynamic Filters
-~~~~~~~~~~~~~~~
-
-.. versionadded:: 1.5
-    Dynamic filters support was added in Twig 1.5.
-
-A filter name containing the special ``*`` character is a dynamic filter as
-the ``*`` can be any string::
-
-    $twig->addFilter('*_path', new Twig_Filter_Function('twig_path'));
-
-    function twig_path($name, $arguments)
-    {
-        // ...
-    }
-
-The following filters will be matched by the above defined dynamic filter:
-
-* ``product_path``
-* ``category_path``
-
-A dynamic filter can define more than one dynamic parts::
-
-    $twig->addFilter('*_path_*', new Twig_Filter_Function('twig_path'));
-
-    function twig_path($name, $suffix, $arguments)
-    {
-        // ...
-    }
-
-The filter will receive all dynamic part values before the normal filters
-arguments. For instance, a call to ``'foo'|a_path_b()`` will result in the
-following PHP call: ``twig_path('a', 'b', 'foo')``.
-
 Functions
 ---------
 
@@ -298,48 +264,9 @@ Adding a function is similar to adding a filter. This can be done by calling the
 
     $twig = new Twig_Environment($loader);
     $twig->addFunction('functionName', new Twig_Function_Function('someFunction'));
-
-You can also expose extension methods as functions in your templates::
-
-    // $this is an object that implements Twig_ExtensionInterface.
-    $twig = new Twig_Environment($loader);
     $twig->addFunction('otherFunction', new Twig_Function_Method($this, 'someMethod'));
 
 Functions also support ``needs_environment`` and ``is_safe`` parameters.
-
-Dynamic Functions
-~~~~~~~~~~~~~~~~~
-
-.. versionadded:: 1.5
-    Dynamic functions support was added in Twig 1.5.
-
-A function name containing the special ``*`` character is a dynamic function
-as the ``*`` can be any string::
-
-    $twig->addFunction('*_path', new Twig_Function_Function('twig_path'));
-
-    function twig_path($name, $arguments)
-    {
-        // ...
-    }
-
-The following functions will be matched by the above defined dynamic function:
-
-* ``product_path``
-* ``category_path``
-
-A dynamic function can define more than one dynamic parts::
-
-    $twig->addFilter('*_path_*', new Twig_Filter_Function('twig_path'));
-
-    function twig_path($name, $suffix, $arguments)
-    {
-        // ...
-    }
-
-The function will receive all dynamic part values before the normal functions
-arguments. For instance, a call to ``a_path_b('foo')`` will result in the
-following PHP call: ``twig_path('a', 'b', 'foo')``.
 
 Tags
 ----
@@ -400,7 +327,7 @@ Now, let's see the actual code of this class::
             $this->parser->getStream()->expect(Twig_Token::BLOCK_END_TYPE);
 
             return new Project_Set_Node($name, $value, $lineno, $this->getTag());
-        }
+            }
 
         public function getTag()
         {
@@ -446,10 +373,10 @@ The ``Project_Set_Node`` class itself is rather simple::
 
     class Project_Set_Node extends Twig_Node
     {
-        public function __construct($name, Twig_Node_Expression $value, $lineno, $tag = null)
+        public function __construct($name, Twig_Node_Expression $value, $lineno)
         {
-            parent::__construct(array('value' => $value), array('name' => $name), $lineno, $tag);
-        }
+            parent::__construct(array('value' => $value), array('name' => $name), $lineno);
+            }
 
         public function compile(Twig_Compiler $compiler)
         {

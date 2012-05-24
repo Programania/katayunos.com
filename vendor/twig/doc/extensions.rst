@@ -29,63 +29,56 @@ An extension is a class that implements the following interface::
          *
          * @param Twig_Environment $environment The current Twig_Environment instance
          */
-        function initRuntime(Twig_Environment $environment);
+        public function initRuntime(Twig_Environment $environment);
 
         /**
          * Returns the token parser instances to add to the existing list.
          *
          * @return array An array of Twig_TokenParserInterface or Twig_TokenParserBrokerInterface instances
          */
-        function getTokenParsers();
+        public function getTokenParsers();
 
         /**
          * Returns the node visitor instances to add to the existing list.
          *
          * @return array An array of Twig_NodeVisitorInterface instances
          */
-        function getNodeVisitors();
+        public function getNodeVisitors();
 
         /**
          * Returns a list of filters to add to the existing list.
          *
          * @return array An array of filters
          */
-        function getFilters();
+        public function getFilters();
 
         /**
          * Returns a list of tests to add to the existing list.
          *
          * @return array An array of tests
          */
-        function getTests();
-
-        /**
-         * Returns a list of functions to add to the existing list.
-         *
-         * @return array An array of functions
-         */
-        function getFunctions();
+        public function getTests();
 
         /**
          * Returns a list of operators to add to the existing list.
          *
          * @return array An array of operators
          */
-        function getOperators();
+        public function getOperators();
 
         /**
-         * Returns a list of global variables to add to the existing list.
+         * Returns a list of global functions to add to the existing list.
          *
-         * @return array An array of global variables
+         * @return array An array of global functions
          */
-        function getGlobals();
+        public function getGlobals();
 
         /**
          * Returns the name of the extension.
          *
          * @return string The extension name
          */
-        function getName();
+        public function getName();
     }
 
 To keep your extension class clean and lean, it can inherit from the built-in
@@ -127,11 +120,11 @@ Of course, you need to first load the extension file by either using
 
     The bundled extensions are great examples of how extensions work.
 
-Globals
--------
+Globals and Functions
+---------------------
 
-Global variables can be registered in an extension via the ``getGlobals()``
-method::
+Global variables and functions can be registered in an extensions via the
+``getGlobals()`` method::
 
     class Project_Twig_Extension extends Twig_Extension
     {
@@ -139,24 +132,7 @@ method::
         {
             return array(
                 'text' => new Text(),
-            );
-        }
-
-        // ...
-    }
-
-Functions
----------
-
-Functions can be registered in an extension via the ``getFunctions()``
-method::
-
-    class Project_Twig_Extension extends Twig_Extension
-    {
-        public function getFunctions()
-        {
-            return array(
-                'lipsum' => new Twig_Function_Function('generate_lipsum'),
+                'lipsum' => new Twig_Function(new Text(), 'getLipsum'),
             );
         }
 
@@ -232,10 +208,12 @@ method::
     {
         public function getFilters()
         {
-            return array_merge(parent::getFilters(), array(
-                'date' => new Twig_Filter_Method($this, 'dateFilter'),
-                // ...
-            ));
+            return array_merge(
+                parent::getFilters(),
+                array(
+                    'date' => Twig_Filter_Method($this, 'dateFilter')
+                )
+            );
         }
 
         public function dateFilter($timestamp, $format = 'F j, Y H:i')

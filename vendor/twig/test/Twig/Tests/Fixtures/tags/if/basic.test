@@ -1,9 +1,9 @@
 --TEST--
 "if" creates a condition
 --TEMPLATE--
-{% if a is defined %}
+{% if a %}
   {{ a }}
-{% elseif b is defined %}
+{% elseif b %}
   {{ b }}
 {% else %}
   NOTHING

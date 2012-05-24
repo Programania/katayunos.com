@@ -15,24 +15,17 @@
  * @package    twig
  * @author     Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Markup implements Countable
+class Twig_Markup
 {
     protected $content;
-    protected $charset;
 
-    public function __construct($content, $charset)
+    public function __construct($content)
     {
         $this->content = (string) $content;
-        $this->charset = $charset;
     }
 
     public function __toString()
     {
         return $this->content;
-    }
-
-    public function count()
-    {
-        return function_exists('mb_get_info') ? mb_strlen($this->content, $this->charset) : strlen($this->content);
     }
 }

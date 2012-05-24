@@ -13,23 +13,17 @@ class Twig_Tests_Loader_FilesystemTest extends PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider getSecurityTests
+     * @expectedException Twig_Error_Loader
      */
     public function testSecurity($template)
     {
-        $loader = new Twig_Loader_Filesystem(array(dirname(__FILE__).'/../Fixtures'));
-
-        try {
-            $loader->getCacheKey($template);
-            $this->fail();
-        } catch (Twig_Error_Loader $e) {
-            $this->assertNotContains('Unable to find template', $e->getMessage());
-        }
+        $loader = new Twig_Loader_Filesystem(array(__DIR__.'/../Fixtures'));
+        $loader->getCacheKey($template);
     }
 
     public function getSecurityTests()
     {
         return array(
-            array("AutoloaderTest\0.php"),
             array('..\\AutoloaderTest.php'),
             array('..\\\\\\AutoloaderTest.php'),
             array('../AutoloaderTest.php'),

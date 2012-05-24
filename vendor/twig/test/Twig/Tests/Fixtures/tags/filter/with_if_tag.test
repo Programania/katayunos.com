@@ -6,13 +6,13 @@
 {{ items|join(', ') }}
 {% endif %}
 
-{% if items.3 is defined %}
+{% if items.3 %}
 FOO
 {% else %}
 {{ items.1 }}
 {% endif %}
 
-{% if items.3 is defined %}
+{% if items.3 %}
 FOO
 {% elseif items.1 %}
 {{ items.0 }}

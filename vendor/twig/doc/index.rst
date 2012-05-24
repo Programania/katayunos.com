@@ -11,8 +11,3 @@ Twig
     extensions
     hacking
     recipes
-    coding_standards
-    tags/index
-    filters/index
-    functions/index
-    tests/index

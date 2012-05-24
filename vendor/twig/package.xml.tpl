@@ -40,7 +40,6 @@
  <contents>
    <dir name="/">
      <file name="AUTHORS" role="doc" />
-     <file name="CHANGELOG" role="doc" />
      <file name="LICENSE" role="doc" />
      <file name="README.markdown" role="doc" />
      <dir name="lib">

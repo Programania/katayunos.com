@@ -9,9 +9,6 @@ Twig supports array notation
 {{ {0: 1, 'foo': 'bar'}|join(',') }}
 {{ {0: 1, 'foo': 'bar'}|keys|join(',') }}
 
-{{ {0: 1, foo: 'bar'}|join(',') }}
-{{ {0: 1, foo: 'bar'}|keys|join(',') }}
-
 {# nested arrays #}
 {% set a = [1, 2, [1, 2], {'foo': {'foo': 'bar'}}] %}
 {{ a[2]|join(',') }}
@@ -30,21 +27,11 @@ Twig supports array notation
     2,
   ]|join(',')
 }}
-
-{# keys can be any expression #}
-{% set a = 1 %}
-{% set b = "foo" %}
-{% set ary = { (a): 'a', (b): 'b', 'c': 'c', (a ~ b): 'd' } %}
-{{ ary|keys|join(',') }}
-{{ ary|join(',') }}
 --DATA--
 return array('bar' => 'bar', 'foo' => array('bar' => 'bar'))
 --EXPECT--
 1,2
 foo,bar
-1,bar
-0,foo
-
 1,bar
 0,foo
 
@@ -56,6 +43,3 @@ bar
 FOO,BAR,
 
 1,2
-
-1,foo,c,1foo
-a,b,c,d

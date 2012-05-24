@@ -30,8 +30,4 @@ interface Twig_FunctionInterface
     function needsContext();
 
     function getSafe(Twig_Node $filterArgs);
-
-    function setArguments($arguments);
-
-    function getArguments();
 }

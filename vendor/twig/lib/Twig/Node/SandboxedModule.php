@@ -33,7 +33,9 @@ class Twig_Node_SandboxedModule extends Twig_Node_Module
 
     protected function compileDisplayBody(Twig_Compiler $compiler)
     {
-        $compiler->write("\$this->checkSecurity();\n");
+        if (null === $this->getNode('parent')) {
+            $compiler->write("\$this->checkSecurity();\n");
+        }
 
         parent::compileDisplayBody($compiler);
     }
@@ -52,6 +54,16 @@ class Twig_Node_SandboxedModule extends Twig_Node_Module
             ->write(!$this->usedFunctions ? "array()\n" : "array('".implode('\', \'', $this->usedFunctions)."')\n")
             ->outdent()
             ->write(");\n")
+        ;
+
+        if (null !== $this->getNode('parent')) {
+            $compiler
+                ->raw("\n")
+                ->write("\$this->parent->checkSecurity();\n")
+            ;
+        }
+
+        $compiler
             ->outdent()
             ->write("}\n\n")
         ;

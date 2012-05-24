@@ -32,33 +32,22 @@ class Twig_Error extends Exception
      */
     public function __construct($message, $lineno = -1, $filename = null, Exception $previous = null)
     {
-        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
-            $this->previous = $previous;
-            parent::__construct('');
-        } else {
-            parent::__construct('', 0, $previous);
+        if (-1 === $lineno || null === $filename) {
+            list($lineno, $filename) = $this->findTemplateInfo(null !== $previous ? $previous : $this, $lineno, $filename);
         }
 
         $this->lineno = $lineno;
         $this->filename = $filename;
-
-        if (-1 === $this->lineno || null === $this->filename) {
-            $this->guessTemplateInfo();
-        }
-
         $this->rawMessage = $message;
 
         $this->updateRepr();
-    }
 
-    /**
-     * Gets the raw message.
-     *
-     * @return string The raw message
-     */
-    public function getRawMessage()
-    {
-        return $this->rawMessage;
+        if (version_compare(PHP_VERSION, '5.3.0', '<')) {
+            $this->previous = $previous;
+            parent::__construct($this->message);
+        } else {
+            parent::__construct($this->message, 0, $previous);
+        }
     }
 
     /**
@@ -133,12 +122,7 @@ class Twig_Error extends Exception
         }
 
         if (null !== $this->filename) {
-            if (is_string($this->filename) || (is_object($this->filename) && method_exists($this->filename, '__toString'))) {
-                $filename = sprintf('"%s"', $this->filename);
-            } else {
-                $filename = json_encode($this->filename);
-            }
-            $this->message .= sprintf(' in %s', $filename);
+            $this->message .= sprintf(' in %s', json_encode($this->filename));
         }
 
         if ($this->lineno >= 0) {
@@ -150,48 +134,51 @@ class Twig_Error extends Exception
         }
     }
 
-    protected function guessTemplateInfo()
+    protected function findTemplateInfo(Exception $e, $currentLine, $currentFile)
     {
-        $template = null;
-        foreach (debug_backtrace() as $trace) {
-            if (isset($trace['object']) && $trace['object'] instanceof Twig_Template && 'Twig_Template' !== get_class($trace['object'])) {
-                $template = $trace['object'];
+        if (!function_exists('token_get_all')) {
+            return array($currentLine, $currentFile);
+        }
 
-                // update template filename
-                if (null === $this->filename) {
-                    $this->filename = $template->getTemplateName();
+        $traces = $e->getTrace();
+        foreach ($traces as $i => $trace) {
+            if (!isset($trace['class']) || 'Twig_Template' === $trace['class']) {
+                continue;
+            }
+
+            $r = new ReflectionClass($trace['class']);
+            if (!$r->implementsInterface('Twig_TemplateInterface')) {
+                continue;
+            }
+
+            if (!file_exists($r->getFilename())) {
+                // probably an eval()'d code
+                return array($currentLine, $currentFile);
+            }
+
+            $trace = $traces[$i - 1];
+            if (!isset($trace['line'])) {
+                $trace['line'] = -log(0);
+            }
+
+            $tokens = token_get_all(file_get_contents($r->getFilename()));
+            $templateline = -1;
+            $template = null;
+            while ($token = array_shift($tokens)) {
+                if (isset($token[2]) && $token[2] >= $trace['line']) {
+                    return array($templateline, $template);
+                }
+
+                if (T_COMMENT === $token[0] && null === $template && preg_match('#/\* +(.+) +\*/#', $token[1], $match)) {
+                    $template = $match[1];
+                } elseif (T_COMMENT === $token[0] && preg_match('#^//\s*line (\d+)\s*$#', $token[1], $match)) {
+                    $templateline = $match[1];
                 }
             }
+
+            return array($currentLine, $template);
         }
 
-        if (null === $template || $this->lineno > -1) {
-            return;
-        }
-
-        $r = new ReflectionObject($template);
-        $file = $r->getFileName();
-
-        $exceptions = array($e = $this);
-        while (method_exists($e, 'getPrevious') && $e = $e->getPrevious()) {
-            $exceptions[] = $e;
-        }
-
-        while ($e = array_pop($exceptions)) {
-            $traces = $e->getTrace();
-            while ($trace = array_shift($traces)) {
-                if (!isset($trace['file']) || !isset($trace['line']) || $file != $trace['file']) {
-                    continue;
-                }
-
-                foreach ($template->getDebugInfo() as $codeLine => $templateLine) {
-                    if ($codeLine <= $trace['line']) {
-                        // update template line
-                        $this->lineno = $templateLine;
-
-                        return;
-                    }
-                }
-            }
-        }
+        return array($currentLine, $currentFile);
     }
 }

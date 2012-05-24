@@ -47,31 +47,21 @@ class Twig_Loader_Filesystem implements Twig_LoaderInterface
      */
     public function setPaths($paths)
     {
+        // invalidate the cache
+        $this->cache = array();
+
         if (!is_array($paths)) {
             $paths = array($paths);
         }
 
         $this->paths = array();
         foreach ($paths as $path) {
-            $this->addPath($path);
+            if (!is_dir($path)) {
+                throw new Twig_Error_Loader(sprintf('The "%s" directory does not exist.', $path));
+            }
+
+            $this->paths[] = $path;
         }
-    }
-
-    /**
-     * Adds a path where templates are stored.
-     *
-     * @param string $path A path where to look for templates
-     */
-    public function addPath($path)
-    {
-        // invalidate the cache
-        $this->cache = array();
-
-        if (!is_dir($path)) {
-            throw new Twig_Error_Loader(sprintf('The "%s" directory does not exist.', $path));
-        }
-
-        $this->paths[] = $path;
     }
 
     /**
@@ -106,7 +96,7 @@ class Twig_Loader_Filesystem implements Twig_LoaderInterface
      */
     public function isFresh($name, $time)
     {
-        return filemtime($this->findTemplate($name)) <= $time;
+        return filemtime($this->findTemplate($name)) < $time;
     }
 
     protected function findTemplate($name)
@@ -131,10 +121,6 @@ class Twig_Loader_Filesystem implements Twig_LoaderInterface
 
     protected function validateName($name)
     {
-        if (false !== strpos($name, "\0")) {
-            throw new Twig_Error_Loader('A template name cannot contain NUL bytes.');
-        }
-
         $parts = explode('/', $name);
         $level = 0;
         foreach ($parts as $part) {

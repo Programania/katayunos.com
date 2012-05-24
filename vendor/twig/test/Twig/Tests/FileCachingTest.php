@@ -1,21 +1,15 @@
 <?php
 
-class Twig_Tests_FileCachingTest extends PHPUnit_Framework_TestCase
+require_once dirname(__FILE__).'/TestCase.php';
+
+class Twig_Tests_FileCachingTest extends Twig_Tests_TestCase
 {
     protected $fileName;
     protected $env;
-    protected $tmpDir;
 
     public function setUp()
     {
-        $this->tmpDir = sys_get_temp_dir().'/TwigTests';
-        if (!file_exists($this->tmpDir)) {
-            @mkdir($this->tmpDir, 0777, true);;
-        }
-
-        if (!is_writable($this->tmpDir)) {
-            $this->markTestSkipped(sprintf('Unable to run the tests as "%s" is not writable.', $this->tmpDir));
-        }
+        parent::setUp();
 
         $this->env = new Twig_Environment(new Twig_Loader_String(), array('cache' => $this->tmpDir));
     }
@@ -26,7 +20,7 @@ class Twig_Tests_FileCachingTest extends PHPUnit_Framework_TestCase
             unlink($this->fileName);
         }
 
-        $this->removeDir($this->tmpDir);
+        parent::tearDown();
     }
 
     public function testWritingCacheFiles()
@@ -48,23 +42,5 @@ class Twig_Tests_FileCachingTest extends PHPUnit_Framework_TestCase
         $this->assertTrue(file_exists($cacheFileName), 'Cache file does not exist.');
         $this->env->clearCacheFiles();
         $this->assertFalse(file_exists($cacheFileName), 'Cache file was not cleared.');
-    }
-
-    private function removeDir($target)
-    {
-        $fp = opendir($target);
-        while (false !== $file = readdir($fp)) {
-            if (in_array($file, array('.', '..'))) {
-                continue;
-            }
-
-            if (is_dir($target.'/'.$file)) {
-                self::removeDir($target.'/'.$file);
-            } else {
-                unlink($target.'/'.$file);
-            }
-        }
-        closedir($fp);
-        rmdir($target);
     }
 }

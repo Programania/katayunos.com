@@ -8,14 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-/**
- * Imports macros.
- *
- * <pre>
- *   {% from 'forms.html' import forms %}
- * </pre>
- */
 class Twig_TokenParser_From extends Twig_TokenParser
 {
     /**
@@ -56,7 +48,7 @@ class Twig_TokenParser_From extends Twig_TokenParser
         $node = new Twig_Node_Import($macro, new Twig_Node_Expression_AssignName($this->parser->getVarName(), $token->getLine()), $token->getLine(), $this->getTag());
 
         foreach($targets as $name => $alias) {
-            $this->parser->addImportedFunction($alias, 'get'.$name, $node->getNode('var'));
+            $this->parser->addImportedFunction($alias, $name, $node->getNode('var'));
         }
 
         return $node;
@@ -65,7 +57,7 @@ class Twig_TokenParser_From extends Twig_TokenParser
     /**
      * Gets the tag name associated with this token parser.
      *
-     * @return string The tag name
+     * @param string The tag name
      */
     public function getTag()
     {

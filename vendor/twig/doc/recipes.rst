@@ -46,7 +46,7 @@ A template can be customized in two different ways:
   blocks;
 
 * *Replacement*: If you use the filesystem loader, Twig loads the first
-  template it finds in a list of configured directories; a template found in a
+  template if finds in a list of configured directories; a template found in a
   directory *replaces* another one from a directory further in the list.
 
 But how do you combine both: *replace* a template that also extends itself
@@ -246,75 +246,14 @@ Validating the Template Syntax
 When template code is providing by a third-party (through a web interface for
 instance), it might be interesting to validate the template syntax before
 saving it. If the template code is stored in a `$template` variable, here is
-how you can do it::
+how you can do it:
 
-    try {
-        $twig->parse($twig->tokenize($template));
+try {
+     $twig->parse($twig->tokenize($template));
 
-        // the $template is valid
-    } catch (Twig_Error_Syntax $e) {
-        // $template contains one or more syntax errors
-    }
-
-If you iterate over a set of files, you can pass the filename to the
-``tokenize()`` method to get the filename in the exception message::
-
-    foreach ($files as $file) {
-        try {
-            $twig->parse($twig->tokenize($template, $file));
-
-            // the $template is valid
-        } catch (Twig_Error_Syntax $e) {
-            // $template contains one or more syntax errors
-        }
-    }
-
-.. note::
-
-    This method won't catch any sandbox policy violations because the policy
-    is enforced during template rendering (as Twig needs the context for some
-    checks like allowed methods on objects).
-
-Refreshing modified Templates when APC is enabled and apc.stat = 0
-------------------------------------------------------------------
-
-When using APC with ``apc.stat`` set to ``0`` and Twig cache enabled, clearing
-the template cache won't update the APC cache. To get around this, one can
-extend ``Twig_Environment`` and force the update of the APC cache when Twig
-rewrites the cache::
-
-    class Twig_Environment_APC extends Twig_Environment
-    {
-        protected function writeCacheFile($file, $content)
-        {
-            parent::writeCacheFile($file, $content);
-
-            // Compile cached file into bytecode cache
-            apc_compile_file($file);
-        }
-    }
-
-Reusing a stateful Node Visitor
--------------------------------
-
-When attaching a visitor to a ``Twig_Environment`` instance, Twig uses it to
-visit *all* templates it compiles. If you need to keep some state information
-around, you probably want to reset it when visiting a new template.
-
-This can be easily achieved with the following code::
-
-    protected $someTemplateState = array();
-
-    public function enterNode(Twig_NodeInterface $node, Twig_Environment $env)
-    {
-        if ($node instanceof Twig_Node_Module) {
-            // reset the state as we are entering a new template
-            $this->someTemplateState = array();
-        }
-
-        // ...
-
-        return $node;
-    }
+     // the $template is valid
+} catch (Twig_Error_Syntax $e) {
+     // $template contains one or more syntax errors
+}
 
 .. _callback: http://www.php.net/manual/en/function.is-callable.php

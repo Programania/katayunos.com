@@ -8,14 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-/**
- * Imports macros.
- *
- * <pre>
- *   {% import 'forms.html' as forms %}
- * </pre>
- */
 class Twig_TokenParser_Import extends Twig_TokenParser
 {
     /**
@@ -38,7 +30,7 @@ class Twig_TokenParser_Import extends Twig_TokenParser
     /**
      * Gets the tag name associated with this token parser.
      *
-     * @return string The tag name
+     * @param string The tag name
      */
     public function getTag()
     {

@@ -39,6 +39,8 @@ class Twig_Tests_Node_Expression_FilterTest extends Twig_Tests_Node_TestCase
         $expr = new Twig_Node_Expression_Constant('foo', 0);
         $node = $this->createFilter($expr, 'foobar', array(new Twig_Node_Expression_Constant('bar', 0), new Twig_Node_Expression_Constant('foobar', 0)));
 
+        $tests[] = array($node, '$this->resolveMissingFilter("foobar", array("foo", "bar", "foobar"))');
+
         try {
             $node->compile($this->getCompiler());
             $this->fail();
@@ -64,22 +66,10 @@ class Twig_Tests_Node_Expression_FilterTest extends Twig_Tests_Node_TestCase
         return $tests;
     }
 
-    /**
-     * @covers Twig_Node_Expression_Filter::compile
-     * @expectedException        Twig_Error_Syntax
-     * @expectedExceptionMessage The filter "uppe" does not exist. Did you mean "upper" at line 0
-     */
-    public function testUnknownFilter()
-    {
-        $node = $this->createFilter(new Twig_Node_Expression_Constant('foo', 0), 'uppe');
-        $node->compile($this->getCompiler());
-    }
-
     protected function createFilter($node, $name, array $arguments = array())
     {
         $name = new Twig_Node_Expression_Constant($name, 0);
         $arguments = new Twig_Node($arguments);
-
         return new Twig_Node_Expression_Filter($node, $name, $arguments, 0);
     }
 }

@@ -3,7 +3,7 @@
 --TEMPLATE--
 {% for item in items %}
 {% endfor %}
-{% if loop is not defined %}WORKS{% endif %}
+{% if not loop %}WORKS{% endif %}
 --DATA--
 return array('items' => array())
 --EXPECT--

@@ -18,7 +18,6 @@
 abstract class Twig_Function implements Twig_FunctionInterface
 {
     protected $options;
-    protected $arguments = array();
 
     public function __construct(array $options = array())
     {
@@ -26,16 +25,6 @@ abstract class Twig_Function implements Twig_FunctionInterface
             'needs_environment' => false,
             'needs_context'     => false,
         ), $options);
-    }
-
-    public function setArguments($arguments)
-    {
-        $this->arguments = $arguments;
-    }
-
-    public function getArguments()
-    {
-        return $this->arguments;
     }
 
     public function needsEnvironment()

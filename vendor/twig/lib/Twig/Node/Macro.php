@@ -38,44 +38,25 @@ class Twig_Node_Macro extends Twig_Node
             ->addDebugInfo($this)
             ->write(sprintf("public function get%s(%s)\n", $this->getAttribute('name'), implode(', ', $arguments)), "{\n")
             ->indent()
+            ->write("\$context = array_merge(\$this->env->getGlobals(), array(\n")
+            ->indent()
         ;
 
-        if (!count($this->getNode('arguments'))) {
-            $compiler->write("\$context = \$this->env->getGlobals();\n\n");
-        } else {
+        foreach ($this->getNode('arguments') as $argument) {
             $compiler
-                ->write("\$context = \$this->env->mergeGlobals(array(\n")
-                ->indent()
-            ;
-
-            foreach ($this->getNode('arguments') as $argument) {
-                $compiler
-                    ->write('')
-                    ->string($argument->getAttribute('name'))
-                    ->raw(' => $'.$argument->getAttribute('name'))
-                    ->raw(",\n")
-                ;
-            }
-
-            $compiler
-                ->outdent()
-                ->write("));\n\n")
+                ->write('')
+                ->string($argument->getAttribute('name'))
+                ->raw(' => $'.$argument->getAttribute('name'))
+                ->raw(",\n")
             ;
         }
 
         $compiler
-            ->write("\$blocks = array();\n\n")
+            ->outdent()
+            ->write("));\n\n")
             ->write("ob_start();\n")
-            ->write("try {\n")
-            ->indent()
             ->subcompile($this->getNode('body'))
-            ->outdent()
-            ->write("} catch(Exception \$e) {\n")
-            ->indent()
-            ->write("ob_end_clean();\n\n")
-            ->write("throw \$e;\n")
-            ->outdent()
-            ->write("}\n\n")
+            ->raw("\n")
             ->write("return ob_get_clean();\n")
             ->outdent()
             ->write("}\n\n")

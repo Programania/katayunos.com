@@ -1,104 +1,16 @@
 --TEST--
 "defined" test
 --TEMPLATE--
-{{ definedVar                     is     defined ? 'ok' : 'ko' }}
-{{ definedVar                     is not defined ? 'ko' : 'ok' }}
-{{ undefinedVar                   is     defined ? 'ko' : 'ok' }}
-{{ undefinedVar                   is not defined ? 'ok' : 'ko' }}
-{{ zeroVar                        is     defined ? 'ok' : 'ko' }}
-{{ nullVar                        is     defined ? 'ok' : 'ko' }}
-{{ nested.definedVar              is     defined ? 'ok' : 'ko' }}
-{{ nested['definedVar']           is     defined ? 'ok' : 'ko' }}
-{{ nested.definedVar              is not defined ? 'ko' : 'ok' }}
-{{ nested.undefinedVar            is     defined ? 'ko' : 'ok' }}
-{{ nested['undefinedVar']         is     defined ? 'ko' : 'ok' }}
-{{ nested.undefinedVar            is not defined ? 'ok' : 'ko' }}
-{{ nested.zeroVar                 is     defined ? 'ok' : 'ko' }}
-{{ nested.nullVar                 is     defined ? 'ok' : 'ko' }}
-{{ nested.definedArray.0          is     defined ? 'ok' : 'ko' }}
-{{ nested['definedArray'][0]      is     defined ? 'ok' : 'ko' }}
-{{ object.foo                     is     defined ? 'ok' : 'ko' }}
-{{ object.undefinedMethod         is     defined ? 'ko' : 'ok' }}
-{{ object.getFoo()                is     defined ? 'ok' : 'ko' }}
-{{ object.getFoo('a')             is     defined ? 'ok' : 'ko' }}
-{{ object.undefinedMethod()       is     defined ? 'ko' : 'ok' }}
-{{ object.undefinedMethod('a')    is     defined ? 'ko' : 'ok' }}
-{{ object.self.foo                is     defined ? 'ok' : 'ko' }}
-{{ object.self.undefinedMethod    is     defined ? 'ko' : 'ok' }}
-{{ object.undefinedMethod.self    is     defined ? 'ko' : 'ok' }}
+{{ foo is defined ? 'ok' : 'ko' }}
+{{ bar is defined ? 'ok' : 'ko' }}
+{{ foobar is not defined ? 'ok' : 'ko' }}
+{{ zero is defined ? 'ok' : 'ko' }}
+{{ nested.foo is defined ? 'ok' : 'ko' }}
+{{ nested.bar is not defined ? 'ok' : 'ko' }}
+{{ nested.zero is defined ? 'ok' : 'ko' }}
 --DATA--
-return array(
-    'definedVar' => 'defined',
-    'zeroVar'    => 0,
-    'nullVar'    => null,
-    'nested'      => array(
-        'definedVar'   => 'defined',
-        'zeroVar'      => 0,
-        'nullVar'      => null,
-        'definedArray' => array(0),
-    ),
-    'object' => new Foo(),
-);
+return array('foo' => 'bar', 'bar' => null, 'zero' => 0, 'nested' => array('foo' => 'foo', 'zero' => 0));
 --EXPECT--
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
---DATA--
-return array(
-    'definedVar' => 'defined',
-    'zeroVar'    => 0,
-    'nullVar'    => null,
-    'nested'      => array(
-        'definedVar'   => 'defined',
-        'zeroVar'      => 0,
-        'nullVar'      => null,
-        'definedArray' => array(0),
-    ),
-    'object' => new Foo(),
-);
---CONFIG--
-return array('strict_variables' => false)
---EXPECT--
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
-ok
 ok
 ok
 ok

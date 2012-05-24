@@ -32,8 +32,8 @@ Installation
 You have multiple ways to install Twig. If you are unsure what to do, go with
 the tarball.
 
-Installing from the tarball release
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+From the tarball release
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Download the most recent tarball from the `download page`_
 2. Unpack the tarball
@@ -43,8 +43,8 @@ Installing the development version
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. Install Subversion or Git
-2. For Git: ``git clone git://github.com/fabpot/Twig.git``
-3. For Subversion: ``svn co http://svn.twig-project.org/trunk/ twig``
+2. For Subversion: ``svn co http://svn.twig-project.org/trunk/ twig``, for Git:
+   ``git clone git://github.com/fabpot/Twig.git``
 
 Installing the PEAR package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,63 +52,6 @@ Installing the PEAR package
 1. Install PEAR
 2. ``pear channel-discover pear.twig-project.org``
 3. ``pear install twig/Twig`` (or ``pear install twig/Twig-beta``)
-
-Installing via Composer
-~~~~~~~~~~~~~~~~~~~~~~~
-
-1. Install composer in your project:
-
-.. code-block:: bash
-
-    curl -s http://getcomposer.org/installer | php
-
-2. Create a ``composer.json`` file in your project root:
-
-.. code-block:: javascript
-
-    {
-        "require": {
-            "twig/twig": "1.6.0"
-        }
-    }
-
-3. Install via composer
-
-.. code-block:: bash
-
-    php composer.phar install
-
-Installing the C extension
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. versionadded:: 1.4
-    The C extension was added in Twig 1.4.
-
-Twig comes with a C extension that enhances the performance of the Twig
-runtime engine. You can install it like any other PHP extension:
-
-.. code-block:: bash
-
-    $ cd ext/twig
-    $ phpize
-    $ ./configure
-    $ make
-    $ make install
-
-Finally, enable the extension in your ``php.ini`` configuration file:
-
-.. code-block:: ini
-
-    extension=twig.so
-
-And from now on, Twig will automatically compile your templates to take
-advantage of the C extension. Note that this extension does not replace the
-PHP code but only provides an optimized version of the
-``Twig_Template::getAttribute()`` method.
-
-.. tip::
-
-    On Windows, you can also simply download and install a `pre-build DLL`_.
 
 Basic API Usage
 ---------------
@@ -133,23 +76,24 @@ installation.
     $loader = new Twig_Loader_String();
     $twig = new Twig_Environment($loader);
 
-    echo $twig->render('Hello {{ name }}!', array('name' => 'Fabien'));
+    $template = $twig->loadTemplate('Hello {{ name }}!');
+
+    $template->display(array('name' => 'Fabien'));
 
 Twig uses a loader (``Twig_Loader_String``) to locate templates, and an
 environment (``Twig_Environment``) to store the configuration.
 
-The ``render()`` method loads the template passed as a first argument and
-renders it with the variables passed as a second argument.
+The ``loadTemplate()`` method uses the loader to locate and load the template
+and returns a template object (``Twig_Template``) which is suitable for
+rendering with the ``display()`` method.
 
-As templates are generally stored on the filesystem, Twig also comes with a
-filesystem loader::
+Twig also comes with a filesystem loader::
 
     $loader = new Twig_Loader_Filesystem('/path/to/templates');
     $twig = new Twig_Environment($loader, array(
       'cache' => '/path/to/compilation_cache',
     ));
 
-    echo $twig->render('index.html', array('name' => 'Fabien'));
+    $template = $twig->loadTemplate('index.html');
 
-.. _`download page`: https://github.com/fabpot/Twig/tags
-.. _`pre-build DLL`: https://github.com/stealth35/stealth35.github.com/downloads
+.. _`download page`: http://www.twig-project.org/installation
