@@ -45,6 +45,10 @@ h1.header.merendojos {
   text-shadow: #2E8F00 2px 2px 2px;
 }
 
+strong {
+  font-weight: bold;
+}
+
 /* Next Katayuno */
 
 .next-katayuno {
